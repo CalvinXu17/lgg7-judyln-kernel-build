@@ -364,6 +364,19 @@ jobs:
           path: ${{ env.OUT_DIR }}/arch/${{ env.ARCH }}/boot/
           retention-days: 7
 
+      - name: 💚 Compress out directory
+        id: out-compress
+        run: |
+          tar -cvzf ${{ env.WORKSPACE }}/out.tar.gz ${{ env.OUT_DIR }}
+          echo "OUT=${{ env.WORKSPACE }}/out.tar.gz" >> $GITHUB_OUTPUT
+
+      - name: 💚 Upload out directory
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ env.KERNEL_NAME }}-${{ env.BUILD_DATE }}-Out
+          path: ${{ steps.out-compress.outputs.OUT }}
+          retention-days: 7
+
       - name: ⏰ Pack Anykernel3
         if: ${{ env.USE_ANYKERNEL3 == 'true' }}
         env:
