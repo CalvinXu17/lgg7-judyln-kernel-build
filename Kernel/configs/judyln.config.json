@@ -2,24 +2,16 @@
   {
     "kernelSource": {
       "name": "lge-judyln",
-      "repo": "https://github.com/CalvinXu17/android_kernel_lge_sdm845.git",
-      "branch": "T",
+      "repo": "https://github.com/EmanuelCN/android_kernel_lge_sdm845.git",
+      "branch": "U",
       "device": "judyln",
       "defconfig": "lineageos_judyln_defconfig"
     },
     "toolchains": [
       {
-        "repo": "https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_aarch64_aarch64-linux-android-4.9.git",
-        "branch": "lineage-19.1",
-        "name": "aarch64-linux-android-4.9",
-        "binaryEnv": [
-          "bin"
-        ]
-      },
-      {
-        "repo": "https://github.com/LineageOS/android_prebuilts_gcc_linux-x86_arm_arm-linux-androideabi-4.9.git",
-        "branch": "lineage-19.1",
-        "name": "arm-linux-androideabi-4.9",
+        "repo": "https://github.com/kdrag0n/proton-clang",
+        "branch": "master",
+        "name": "proton-clang",
         "binaryEnv": [
           "bin"
         ]
@@ -28,15 +20,26 @@
     "enableCcache": true,
     "params": {
       "ARCH": "arm64",
-      "CC": "aarch64-linux-android-gcc",
+      "CC": "proton-clang/bin/clang",
       "externalCommands": {
-        "CROSS_COMPILE": "aarch64-linux-android-",
-        "CROSS_COMPILE_ARM32": "arm-linux-androideabi-"
+        "CROSS_COMPILE": "proton-clang/bin/aarch64-linux-gnu-",
+        "CROSS_COMPILE_ARM32": "proton-clang/bin/arm-linux-gnueabi-",
+        "LD": "proton-clang/bin/ld.lld",
+        "AR": "proton-clang/bin/llvm-ar",
+        "NM": "proton-clang/bin/llvm-nm",
+        "OBJCOPY": "proton-clang/bin/llvm-objcopy",
+        "OBJDUMP": "proton-clang/bin/llvm-objdump",
+        "READELF": "proton-clang/bin/llvm-readelf",
+        "OBJSIZE": "proton-clang/bin/llvm-size",
+        "STRIP": "proton-clang/bin/llvm-strip",
+        "LDGOLD": "proton-clang/bin/aarch64-linux-gnu-ld.gold",
+        "LLVM_AR": "proton-clang/bin/llvm-ar",
+        "LLVM_DIS": "proton-clang/bin/llvm-dis"
       }
     },
     "AnyKernel3": {
       "use": false,
-      "release": true
+      "release": false
     },
     "enableKernelSU": false,
     "enableLXC": false
